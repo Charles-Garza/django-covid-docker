@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'covid.apps.CovidConfig',
     'frontend.apps.FrontendConfig'
+    'rest_framework',
+    'scheduler',
 ]
 
 MIDDLEWARE = [
@@ -125,5 +127,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATICFILES_DIRS = ['static']
-STATIC_ROOT = 'staticfiles' 
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'

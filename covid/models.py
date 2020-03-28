@@ -9,6 +9,13 @@ class allCases(models.Model):
     updated = models.DateTimeField()
     active = models.IntegerField()
 
+    # def save(self, *args, **kwargs):
+    #     if not self.id:
+    #         #self.updated =
+    #         print('here')
+    #
+    #     return super(schedule)
+
 
 class countries(models.Model):
     country_name = models.CharField(max_length=100, primary_key=True)
