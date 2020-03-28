@@ -11,5 +11,5 @@ hopefully integrate a map showing outbreaks.
 **__Dependencies needed to run the project__**:
 ```
 - Python3
-- Django 
+- Django 3.0.4
 ```
