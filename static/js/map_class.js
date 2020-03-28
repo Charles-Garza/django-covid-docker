@@ -33,14 +33,33 @@ class Map {
         console.log(`Marker at ${marker['_latlng']} not found.`);
         return -1;
     }
+
+    autoScaleOnZoom() {
+        for (var i = 0; i < this.markers.length; i++) {
+            this.markers[i].radius(2);
+        }
+    }
+
+    get markerList() {
+        return this.markers;
+    }
 }
 
 class Marker {
     constructor(latitude, longitude, aspect = {}, html) {
         this.marker = L.circle([latitude, longitude], aspect);
         this.marker.bindPopup(html)
+
+        // Attach mouse over listener
+        this.marker.on('mouseover', function(ev) {
+            ev.target.openPopup();
+            console.log(ev.target)
+        });
+
         return this.marker;
     }
+
+    // Getters and Setters
 
     get latitude() {
         return this.marker['_latlng']['lat'];
@@ -48,5 +67,13 @@ class Marker {
 
     get longitude() {
         return this.marker['_latlng']['lng'];
+    }
+
+    get radius() {
+        return this.marker['_mRadius'];
+    }
+
+    set radius(radius) {
+        this.marker.radius = radius;
     }
 }
