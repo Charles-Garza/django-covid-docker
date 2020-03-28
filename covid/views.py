@@ -9,10 +9,10 @@ from .models import allCases
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
-        'All': '/covid-cases/',
-        'Country': '/covid-cases/country/<str:pk>/',
-        'State': '/covid-cases/state/<str:pk>/',
-        'County': '/covid-cases/county/<str:pk>/',
+        'all-cases': '/covid-cases/',
+        'country': '/covid-cases/country/<str:pk>/',
+        'state': '/covid-cases/state/<str:pk>/',
+        'county': '/covid-cases/county/<str:pk>/',
     }
 
     return Response(api_urls)

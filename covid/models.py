@@ -16,6 +16,9 @@ class allCases(models.Model):
 
         return super(allCases, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.cases
+
 
 
 class countries(models.Model):
