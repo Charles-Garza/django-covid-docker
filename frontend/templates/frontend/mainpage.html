@@ -1,12 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="map_style.css">
+    
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/map_style.css' %}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 </head>
 <body>
@@ -20,8 +21,11 @@
     
 </body>
 <footer>
+    {% load static %}
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-    <script src="map_class.js"></script>
-    <script src="main.js"></script>
+    {% load static %}
+    <script src="{% static 'js/map_class.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
 </footer>
 </html>
