@@ -19,7 +19,7 @@ def apiOverview(request):
 
 @api_view(['GET'])
 def allCases(request):
-    allCasesUrl = "https://corona.lmao.ninja/all"
-
     cases = allCases.objects.all()
+    print(cases)
+
     return Response(cases)

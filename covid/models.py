@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 
 # Create your models here.
 class allCases(models.Model):
@@ -9,13 +9,12 @@ class allCases(models.Model):
     updated = models.DateTimeField()
     active = models.IntegerField()
 
-
     def save(self, *args, **kwargs):
-        if not self.id:
-            print('here')
-            # self.updated =
 
-        # return super(schedule)
+        if not self.id:
+            self.updated = datetime.utcnow()
+
+        return super(allCases, self).save(*args, **kwargs)
 
 
 

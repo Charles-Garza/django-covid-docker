@@ -2,7 +2,7 @@ import requests
 from covid.models import allCases
 
 
-def _get_cases_json():
+def _get_all_cases_json():
     url = 'https://corona.lmao.ninja/all'
 
     r = requests.get(url)
@@ -15,19 +15,26 @@ def _get_cases_json():
 
 
 def update_cases():
-    json = _get_cases_json()
+    json = _get_all_cases_json()
     if json is not None:
         try:
             new_case_data = allCases()
 
-            # open weather map gives temps in Kelvin. We want celsius.
+            # open the json data of covid-19 cases
             print(json)
 
-            #temp_in_celsius = json['main']['temp'] - 273.15
-            #new_case_data.temperatue = temp_in_celsius
-            #new_case_data.description = json['weather'][0]['description']
-            #new_case_data.city = json['name']
-            #new_case_data.save()
-            #print("saving...\n" + new_case_data)
-        except:
+            new_case_data.cases = json['cases']
+            new_case_data.deaths = json['deaths']
+            new_case_data.recovered = json['recovered']
+            new_case_data.updated = json['updated']
+            new_case_data.active = json['active']
+
+            new_case_data.save()
+
+            print("saving data...\n")
+        except Exception as e:
             pass
+
+
+def gather_all_info():
+    update_cases()
