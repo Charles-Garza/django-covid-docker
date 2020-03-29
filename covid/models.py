@@ -59,6 +59,7 @@ class county(models.Model):
     state_name = models.ForeignKey(state, on_delete=models.CASCADE)
     updated = models.CharField(max_length=100)
     confirmed = models.IntegerField()
+    recovered = models.IntegerField()
     deaths = models.IntegerField()
     latitude = models.FloatField()
     longitude = models.FloatField()
