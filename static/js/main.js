@@ -45,7 +45,7 @@ function loadCountyMarkers() {
                 fillOpacity: 0.5,
                 radius: (7 * confirmed) * (1/2),
             };
-           
+
             var marker = new Marker(latitude, longitude, markerAspect, markerPopupHTML, confirmed);
             darkMap.addMarker(marker);
         }
@@ -87,6 +87,7 @@ function loadCountryMarkers() {
             darkMap.addMarker(marker);
         }
     });
+
 }
 
 if (window.addEventListener) {
