@@ -3,6 +3,7 @@ from datetime import datetime
 
 # Create your models here.
 class allCases(models.Model):
+    id = models.IntegerField(primary_key=True)
     cases = models.IntegerField()
     deaths = models.IntegerField()
     recovered = models.IntegerField()
@@ -10,14 +11,10 @@ class allCases(models.Model):
     active = models.IntegerField()
 
     def save(self, *args, **kwargs):
-
-        if not self.id:
-            self.updated = datetime.utcnow()
-
         return super(allCases, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.cases
+        return self.id
 
 
 
@@ -48,6 +45,9 @@ class state(models.Model):
     deaths = models.IntegerField()
     today_deaths = models.IntegerField
     active = models.IntegerField()
+
+    def save(self, *args, **kwargs):
+        return super(state, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.state_name
