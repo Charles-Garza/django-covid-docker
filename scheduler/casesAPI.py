@@ -1,5 +1,5 @@
 import requests
-from covid.models import allCases, state
+from covid.models import allCases, state, county
 
 
 def _get_all_cases_json():
@@ -26,8 +26,6 @@ def update_cases():
             new_case_data.active = json['active']
 
             new_case_data.save()
-
-            print("saving data...\n")
         except:
             pass
 
@@ -48,8 +46,6 @@ def update_state_cases():
     json = _get_all_state_cases_json()
     if json is not None:
         try:
-            print(json)
-
             for item in json:
                 print(item)
                 new_state_case_data = state()
@@ -61,14 +57,51 @@ def update_state_cases():
                 new_state_case_data.active = item['active']
 
                 new_state_case_data.save()
-
-                print("saving data...\n")
-        except Exception as e:
+        except:
             pass
 
+
+def _get_all_county_cases_json():
+    url = 'https://corona.lmao.ninja/jhucsse'
+
+    r = requests.get(url)
+
+    try:
+        r.raise_for_status()
+        return r.json()
+    except:
+        return None
+
+
+def update_county_cases():
+    json = _get_all_county_cases_json()
+    if json is not None:
+
+        try:
+            for item in json:
+                new_county_case_data = county()
+
+                # does not work right now
+                new_county_case_data.state_name = item['province']
+
+                new_county_case_data.county_name = item['city']
+                new_county_case_data.date = item['updatedAt']
+                new_county_case_data.confirmed = item['stats']['confirmed']
+                new_county_case_data.deaths = item['stats']['deaths']
+                new_county_case_data.recovered = item['cases']['recovered']
+                new_county_case_data.latitude = item['coordinates']['latitude']
+                new_county_case_data.longitude = item['coordinates']['longitude']
+
+                new_county_case_data.save()
+
+        except Exception as e:
+            print('here error')
+            print(e)
+            pass
 
 
 
 def gather_all_info():
     # update_cases()
-    update_state_cases()
+    #update_state_cases()
+    update_county_cases()

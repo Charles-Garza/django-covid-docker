@@ -38,3 +38,11 @@ def state_cases(request, pk):
     all_state_cases = state.objects.all().filter(state_name=pk).values().last()
     serializer = AllStatesSerializer(all_state_cases, many=False)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def county_cases(request, fk, pk):
+    all_county_cases = state.objects.all().filter(county_name=pk).filter(state=fk).all()
+    print(all_county_cases)
+    serializer = AllStatesSerializer(all_county_cases, many=True)
+    return Response(serializer.data)

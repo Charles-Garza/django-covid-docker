@@ -62,6 +62,9 @@ class county(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
 
+    def save(self, *args, **kwargs):
+        return super(county, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.county_name
 
