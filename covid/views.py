@@ -14,6 +14,7 @@ def apiOverview(request):
         'country': '/country/<str:pk>/',
         'all-states': '/states/',
         'state': '/state/<str:pk>/',
+        'all-county': '/state/<str:fk>/counties',
         'county': '/state/<str:fk>/county/<str:pk>/',
     }
 
@@ -41,16 +42,14 @@ def state_cases(request, pk):
 
 
 @api_view(['GET'])
-def county_cases(request, pk):
-    all_county_cases = county.objects.get(county_name=pk)
-    print(all_county_cases)
+def every_county_case(request, fk):
+    all_county_cases = county.objects.filter(state_name=fk).all()
     serializer = AllCountySerializer(all_county_cases, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def county_cases(request, fk, pk):
+def state_county_cases(request, fk, pk):
     all_county_cases = county.objects.filter(state_name=fk).get(county_name=pk)
-    print(all_county_cases)
     serializer = AllCountySerializer(all_county_cases, many=False)
     return Response(serializer.data)

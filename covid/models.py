@@ -31,6 +31,9 @@ class countries(models.Model):
     cases_per_million = models.IntegerField()
     deaths_per_million = models.IntegerField()
 
+    def save(self, *args, **kwargs):
+        return super(countries, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.country_name
 
