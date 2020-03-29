@@ -28,25 +28,27 @@ const tileLayer = L.tileLayer('https://api.maptiler.com/maps/darkmatter/{z}/{x}/
 const darkMap = new Map(map, tileLayer);
 
 function loadCountyMarkers() {
-    var url = apiRoot + 'state/counties/all';
+    var url = apiRoot + 'counties/all';
     fetch(url)
     .then((response) => response.json())
     .then(function(data) {
         console.log('State Counties Data:', data);
-        // for (county of data) {
-        //     var latitude = county['latitude'];
-        //     var longitude = county['longitude'];
-        //     var countyName = county['county_name'];
-        //     var confirmed = county['confirmed'];
-        //     var deaths = county['deaths'];
-        //     var markerPopupHTML = `<h3 class="popup-title white-text">${countyName}</h3>
-        //         <p class="popup-inf white-text">Confirmed: <b class="red-text">${confirmed} </b> </p>
-        //         <p class="popup-inf white-text">Deaths: ${deaths}</p>
-        //     `
+        for (county of data) {
+            var latitude = county['latitude'];
+            var longitude = county['longitude'];
+            var countyName = county['county_name'];
+            var confirmed = county['confirmed'];
+            var recovered = county['recovered'];
+            var deaths = county['deaths'];
+            var markerPopupHTML = `<h3 class="popup-title white-text">${countyName}</h3>
+                <p class="popup-inf white-text">Confirmed: <b class="red-text">${confirmed} </b> </p>
+                <p class="popup-inf white-text">Recovered: <b class="green-text">${recovered} </b></p>
+                <p class="popup-inf white-text">Deaths: ${deaths}</p>
+            `
 
-        //     var marker = new Marker(latitude, longitude, markerAspect, markerPopupHTML);
-        //     darkMap.addMarker(marker);
-        // }
+            var marker = new Marker(latitude, longitude, markerAspect, markerPopupHTML);
+            darkMap.addMarker(marker);
+        }
     });
 }
 
@@ -59,7 +61,7 @@ function loadCountryMarkers() {
         for (country of data) {
             var latitude = country['latitude'];
             var longitude = country['longitude'];
-            var countryName = country['county_name'];
+            var countryName = country['country_name'];
             var cases = country['cases'];
             var active = country['active'];
             var critical = country['critical'];
@@ -67,10 +69,10 @@ function loadCountryMarkers() {
             var recovered = country['recovered'];
 
             var markerPopupHTML = `<h3 class="popup-title white-text">${countryName}</h3>
-                <p class="popup-inf white-text">Confirmed: ${cases} </p>
-                <p class="popup-inf white-text">Confirmed: ${active} </p>
-                <p class="popup-inf white-text">Confirmed: <b class="red-text">${critical} </b> </p>
-                <p class="popup-inf white-text">Confirmed: <b class="green-text">${recovered} </b> </p>
+                <p class="popup-inf white-text">Cases: ${cases} </p>
+                <p class="popup-inf white-text">Active: ${active} </p>
+                <p class="popup-inf white-text">Critical: <b class="red-text">${critical} </b> </p>
+                <p class="popup-inf white-text">Recovered: <b class="green-text">${recovered} </b> </p>
                 <p class="popup-inf white-text">Deaths: ${deaths}</p>
             `
 
@@ -79,15 +81,15 @@ function loadCountryMarkers() {
         }
     });
 }
-}
+
 
 if (window.addEventListener) {
-    window.addEventListener('load', loadTexasMarkers, false);
+    window.addEventListener('load', loadCountyMarkers, false);
     window.addEventListener('load', loadCountryMarkers, false);
 } else if (window.attachEvent) { 
-    window.attachEvent('load', loadTexasMarkers);
+    window.attachEvent('load', loadCountyMarkers);
     window.attachEvent('load', loadCountryMarkers);
 } else {
-    document.addEventListener('load', loadTexasMarkers, false);
+    document.addEventListener('load', loadCountyMarkers, false);
     document.addEventListener('load', loadCountryMarkers, false);
 }
