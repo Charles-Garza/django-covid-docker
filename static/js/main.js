@@ -1,5 +1,5 @@
 /* Global Variables */
-const apiRoot = 'http://localhost:8000/api/';
+const apiRoot = 'http://127.0.0.1:8000/api/';
 
 const markerAspect = {
     color: 'red',
@@ -78,16 +78,16 @@ function loadCountryMarkers() {
             darkMap.addMarker(marker);
         }
     });
-}
+
 }
 
 if (window.addEventListener) {
-    window.addEventListener('load', loadTexasMarkers, false);
+    //window.addEventListener('load', loadTexasMarkers, false);
     window.addEventListener('load', loadCountryMarkers, false);
 } else if (window.attachEvent) { 
-    window.attachEvent('load', loadTexasMarkers);
+    //window.attachEvent('load', loadTexasMarkers);
     window.attachEvent('load', loadCountryMarkers);
 } else {
-    document.addEventListener('load', loadTexasMarkers, false);
+    //document.addEventListener('load', loadTexasMarkers, false);
     document.addEventListener('load', loadCountryMarkers, false);
 }
