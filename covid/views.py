@@ -79,4 +79,3 @@ def single_country_cases(request, pk):
     all_country_cases = countries.objects.get(country_name=pk)
     serializer = AllCountrySerializer(all_country_cases, many=False)
     return Response(serializer.data)
-

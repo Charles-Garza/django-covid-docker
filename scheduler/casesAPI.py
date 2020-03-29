@@ -94,7 +94,6 @@ def update_county_cases():
                 new_county_case_data.longitude = item['coordinates']['longitude']
 
                 new_county_case_data.save()
-
         except:
             pass
 
