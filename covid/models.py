@@ -1,21 +1,18 @@
 from django.db import models
-from datetime import datetime
 
 # Create your models here.
 class allCases(models.Model):
-    id = models.IntegerField(primary_key=True)
     cases = models.IntegerField()
     deaths = models.IntegerField()
     recovered = models.IntegerField()
-    updated = models.DateTimeField()
+    updated = models.CharField(max_length=100)
     active = models.IntegerField()
 
     def save(self, *args, **kwargs):
         return super(allCases, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.id
-
+        return self.cases
 
 
 class countries(models.Model):
@@ -33,6 +30,9 @@ class countries(models.Model):
     critical = models.IntegerField()
     cases_per_million = models.IntegerField()
     deaths_per_million = models.IntegerField()
+
+    def save(self, *args, **kwargs):
+        return super(countries, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.country_name
@@ -56,11 +56,14 @@ class state(models.Model):
 class county(models.Model):
     county_name = models.CharField(max_length=100, primary_key=True)
     state_name = models.ForeignKey(state, on_delete=models.CASCADE)
-    date = models.DateField()
+    updated = models.CharField(max_length=100)
     confirmed = models.IntegerField()
     deaths = models.IntegerField()
     latitude = models.FloatField()
     longitude = models.FloatField()
+
+    def save(self, *args, **kwargs):
+        return super(county, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.county_name
