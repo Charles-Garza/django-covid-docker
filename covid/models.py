@@ -18,6 +18,7 @@ class allCases(models.Model):
 class countries(models.Model):
     country_name = models.CharField(max_length=100, primary_key=True)
     country_ID = models.IntegerField()
+    latitude = models.IntegerField()
     longitude = models.FloatField()
     flag_image = models.CharField(max_length=100)
     iso3 = models.CharField(max_length=100)
