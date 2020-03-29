@@ -10,11 +10,11 @@ from .serializers import AllCaseSerializer, AllStatesSerializer
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
-        'all-cases': '/covid-cases/',
-        'country': '/covid-cases/country/<str:pk>/',
-        'all-states': '/covid-cases/states/',
-        'state': '/covid-cases/state/<str:pk>/',
-        'county': '/covid-cases/county/<str:pk>/',
+        'all-cases': '/api/',
+        'country': '/api/country/<str:pk>/',
+        'all-states': '/api/states/',
+        'state': '/api/state/<str:pk>/',
+        'county': '/api/county/<str:pk>/',
     }
 
     return Response(api_urls)
