@@ -117,7 +117,6 @@ def update_country_cases():
         try:
 
             for item in json:
-
                 new_country_case_data = countries()
 
                 new_country_case_data.country_name = item['country']
@@ -158,7 +157,6 @@ def update_country_cases():
 
 
 def gather_all_info():
-    update_cases()
     print('Finished all cases...')
     update_state_cases()
     print('Finished state cases...')
