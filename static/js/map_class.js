@@ -3,6 +3,15 @@ class Map {
         this.map = map;
         this.markers = []
         tileLayer.addTo(this.map);
+        
+        this.map.markers = this.markers;
+        this.map.on('zoomend', function(env) {
+            var markers = env.target.markers;
+            var mapZoom = env.target['_zoom'];
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setRadius(((8 - (mapZoom - 3))*2500)*(1/2))
+            }
+        });
     }
 
     addMarker(marker) {
@@ -33,29 +42,12 @@ class Map {
         console.log(`Marker at ${marker['_latlng']} not found.`);
         return -1;
     }
-
-    autoScaleOnZoom() {
-        for (var i = 0; i < this.markers.length; i++) {
-            this.markers[i].radius(2);
-        }
-    }
-
-    get markerList() {
-        return this.markers;
-    }
 }
 
 class Marker {
     constructor(latitude, longitude, aspect = {}, html) {
         this.marker = L.circle([latitude, longitude], aspect);
         this.marker.bindPopup(html)
-
-        // Attach mouse over listener
-        this.marker.on('mouseover', function(ev) {
-            ev.target.openPopup();
-            console.log(ev.target)
-        });
-
         return this.marker;
     }
 
