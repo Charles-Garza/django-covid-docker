@@ -17,7 +17,7 @@ const markerAspect = {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.7,
-    radius: 50000, // Increase based on amount of infected later
+    radius: 80000, // Increase based on amount of infected later
 };
 
 
@@ -31,11 +31,3 @@ darkMap.addMarker(marker2);
 
 //darkMap.removeMarker(marker1);
 darkMap.findMarkerIndex(marker1);
-
-map.on('zoomend', function(env) {
-    console.log(env.target['_zoom'])
-    for (var i = 0; i < darkMap.markerList.length; i++) {
-        darkMap.markerList[i].setRadius(env.target['_zoom']*(1/2))
-    }
-    
-});
