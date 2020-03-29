@@ -26,7 +26,8 @@ def update_cases():
             new_case_data.active = json['active']
 
             new_case_data.save()
-        except:
+        except Exception as e:
+            print(e)
             pass
 
 
@@ -100,6 +101,6 @@ def update_county_cases():
 
 
 def gather_all_info():
-    # update_cases()
+    update_cases()
     # update_state_cases()
-    update_county_cases()
+    # update_county_cases()

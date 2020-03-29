@@ -2,18 +2,17 @@ from django.db import models
 
 # Create your models here.
 class allCases(models.Model):
-    id = models.IntegerField(primary_key=True)
     cases = models.IntegerField()
     deaths = models.IntegerField()
     recovered = models.IntegerField()
-    updated = models.DateTimeField()
+    updated = models.CharField(max_length=100)
     active = models.IntegerField()
 
     def save(self, *args, **kwargs):
         return super(allCases, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.id
+        return self.cases
 
 
 class countries(models.Model):
