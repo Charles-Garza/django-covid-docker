@@ -12,3 +12,8 @@ body {
 .white-text {
     color: #ffffff;
 }
+
+.red-text {
+    color: rgb(210, 0, 0);
+}
+

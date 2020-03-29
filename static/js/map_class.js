@@ -9,7 +9,7 @@ class Map {
             var markers = env.target.markers;
             var mapZoom = env.target['_zoom'];
             for (var i = 0; i < markers.length; i++) {
-                markers[i].setRadius(((8 - (mapZoom - 3))*10000)*(1/2))
+                markers[i].setRadius(((8 - (mapZoom - 3))*2500)*(1/2))
             }
         });
     }
@@ -48,13 +48,6 @@ class Marker {
     constructor(latitude, longitude, aspect = {}, html) {
         this.marker = L.circle([latitude, longitude], aspect);
         this.marker.bindPopup(html)
-
-        // Attach mouse over listener
-        this.marker.on('mouseover', function(ev) {
-            ev.target.openPopup();
-            console.log(ev.target)
-        });
-
         return this.marker;
     }
 
