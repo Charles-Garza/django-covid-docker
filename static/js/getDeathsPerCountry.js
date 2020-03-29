@@ -1,4 +1,4 @@
-function getCountries() {
+function getDeathsPerCountries() {
     var url = apiRoot + 'countries';
     var table = document.getElementById("countries-table")
 
@@ -9,8 +9,6 @@ function getCountries() {
 
             var header = `<thead>
             <tr>
-                <td class="white-text centered">Countries</td>
-                <td class="white-text centered">Number Of Cases</td>
                 <td class="white-text centered">Total Deaths per Country</td>
             </tr>
     
@@ -24,16 +22,14 @@ function getCountries() {
                 // var longitude = country['longitude'];
                 var countryName = country['country_name'];
 
-                var cases = country['cases'];
+                // var cases = country['cases'];
                 // var active = country['active'];
                 // var critical = country['critical'];
                 var deaths = country['deaths'];
                 // var recovered = country['recovered'];
 
                 var column = `<tr>
-                   <td class="white-text centered"> ${countryName} </td>
-                   <td class="white-text centered"> ${cases} </td>
-                   <td class="white-text centered"> ${deaths} </td>
+                   <td class="white-text centered"> ${deaths} deaths </td>
                 </tr>`
 
                 table.insertAdjacentHTML('beforeend', column);
@@ -44,9 +40,9 @@ function getCountries() {
 }
 
 if (window.addEventListener) {
-    window.addEventListener('load', getCountries, false);
+    //window.addEventListener('load', getDeathsPerCountries, false);
 } else if (window.attachEvent) {
-    window.attachEvent('load', getCountries);
+    //window.attachEvent('load', getDeathsPerCountries);
 } else {
-    document.addEventListener('load', getCountries, false);
+    //document.addEventListener('load', getDeathsPerCountries, false);
 }

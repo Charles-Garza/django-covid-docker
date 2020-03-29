@@ -69,7 +69,7 @@ def all_county_cases(request):
 
 @api_view(['GET'])
 def all_country_cases(request):
-    all_country_cases = countries.objects.all().values()
+    all_country_cases = countries.objects.all().order_by('-cases').values()
     serializer = AllCountrySerializer(all_country_cases, many=True)
     return Response(serializer.data)
 

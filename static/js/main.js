@@ -89,6 +89,7 @@ function loadCountryMarkers() {
     });
 
 }
+darkMap.updateMarkers();
 
 if (window.addEventListener) {
     window.addEventListener('load', loadCountyMarkers, false);
