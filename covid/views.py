@@ -3,18 +3,18 @@ import requests
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import JsonResponse, HttpResponse
-from .models import allCases, state
-from .serializers import AllCaseSerializer, AllStatesSerializer
+from .models import allCases, state, county
+from .serializers import AllCaseSerializer, AllStatesSerializer, AllCountySerializer
 
 # Create your views here.
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
-        'all-cases': '/api/',
-        'country': '/api/country/<str:pk>/',
-        'all-states': '/api/states/',
-        'state': '/api/state/<str:pk>/',
-        'county': '/api/county/<str:pk>/',
+        'all-cases': 'cases/',
+        'country': '/country/<str:pk>/',
+        'all-states': '/states/',
+        'state': '/state/<str:pk>/',
+        'county': '/state/<str:fk>/county/<str:pk>/',
     }
 
     return Response(api_urls)
@@ -42,7 +42,7 @@ def state_cases(request, pk):
 
 @api_view(['GET'])
 def county_cases(request, fk, pk):
-    all_county_cases = state.objects.all().filter(county_name=pk).filter(state=fk).all()
+    all_county_cases = county.objects.filter(state_name=fk).get(county_name=pk)
     print(all_county_cases)
-    serializer = AllStatesSerializer(all_county_cases, many=True)
+    serializer = AllCountySerializer(all_county_cases, many=False)
     return Response(serializer.data)

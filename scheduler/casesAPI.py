@@ -47,7 +47,6 @@ def update_state_cases():
     if json is not None:
         try:
             for item in json:
-                print(item)
                 new_state_case_data = state()
                 new_state_case_data.state_name = item['state']
                 new_state_case_data.cases = item['cases']
@@ -81,27 +80,26 @@ def update_county_cases():
             for item in json:
                 new_county_case_data = county()
 
-                # does not work right now
-                new_county_case_data.state_name = item['province']
+                state_obj = state.objects.get(state_name=item['province'])
+                new_county_case_data.state_name = state_obj
 
                 new_county_case_data.county_name = item['city']
-                new_county_case_data.date = item['updatedAt']
+
+                new_county_case_data.updated = item['updatedAt']
                 new_county_case_data.confirmed = item['stats']['confirmed']
                 new_county_case_data.deaths = item['stats']['deaths']
-                new_county_case_data.recovered = item['cases']['recovered']
+                new_county_case_data.recovered = item['stats']['recovered']
                 new_county_case_data.latitude = item['coordinates']['latitude']
                 new_county_case_data.longitude = item['coordinates']['longitude']
 
                 new_county_case_data.save()
 
-        except Exception as e:
-            print('here error')
-            print(e)
+        except:
             pass
 
 
 
 def gather_all_info():
     # update_cases()
-    #update_state_cases()
+    # update_state_cases()
     update_county_cases()

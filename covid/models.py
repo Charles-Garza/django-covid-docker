@@ -1,5 +1,4 @@
 from django.db import models
-from datetime import datetime
 
 # Create your models here.
 class allCases(models.Model):
@@ -15,7 +14,6 @@ class allCases(models.Model):
 
     def __str__(self):
         return self.id
-
 
 
 class countries(models.Model):
@@ -56,7 +54,7 @@ class state(models.Model):
 class county(models.Model):
     county_name = models.CharField(max_length=100, primary_key=True)
     state_name = models.ForeignKey(state, on_delete=models.CASCADE)
-    date = models.DateField()
+    updated = models.CharField(max_length=100)
     confirmed = models.IntegerField()
     deaths = models.IntegerField()
     latitude = models.FloatField()
