@@ -1,13 +1,6 @@
 /* Global Variables */
 const apiRoot = 'http://localhost:8000/api/';
 
-const markerAspect = {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.7,
-    radius: 7500,
-};
-
 /**
  * Documentation for leaflet : https://leafletjs.com/reference-1.6.0.html
  * Maps available at : https://cloud.maptiler.com/maps/
@@ -15,7 +8,7 @@ const markerAspect = {
 const map = L.map('map', {
     worldCopyJump: true,
     minZoom: 3,
-    maxZoom: 10,
+    maxZoom: 8,
     zoom: 5,
     center: [29.44928723, -98.52019748],
 });
@@ -46,7 +39,14 @@ function loadCountyMarkers() {
                 <p class="popup-inf white-text">Deaths: ${deaths}</p>
             `
 
-            var marker = new Marker(latitude, longitude, markerAspect, markerPopupHTML);
+            var markerAspect = {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: (7 * confirmed) * (1/2),
+            };
+           
+            var marker = new Marker(latitude, longitude, markerAspect, markerPopupHTML, confirmed);
             darkMap.addMarker(marker);
         }
     });
@@ -76,12 +76,18 @@ function loadCountryMarkers() {
                 <p class="popup-inf white-text">Deaths: ${deaths}</p>
             `
 
-            var marker = new Marker(latitude, longitude, markerAspect, markerPopupHTML);
+            var markerAspect = {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: (7 * cases) * (1/2),
+            };
+
+            var marker = new Marker(latitude, longitude, markerAspect, markerPopupHTML, cases);
             darkMap.addMarker(marker);
         }
     });
 }
-
 
 if (window.addEventListener) {
     window.addEventListener('load', loadCountyMarkers, false);
