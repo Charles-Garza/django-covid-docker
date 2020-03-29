@@ -1,6 +1,6 @@
 function getDeathsPerCountries() {
     var url = apiRoot + 'countries';
-    var table = document.getElementById("countries-deaths-table")
+    var table = document.getElementById("countries-table")
 
     fetch(url)
         .then((response) => response.json())
@@ -9,7 +9,7 @@ function getDeathsPerCountries() {
 
             var header = `<thead>
             <tr>
-                <th>Total Deaths per Country</th>
+                <td class="white-text centered">Total Deaths per Country</td>
             </tr>
     
             </thead>
@@ -29,8 +29,7 @@ function getDeathsPerCountries() {
                 // var recovered = country['recovered'];
 
                 var column = `<tr>
-                   <td> ${deaths} deaths </td>
-                   <td> ${countryName} </td>
+                   <td class="white-text centered"> ${deaths} deaths </td>
                 </tr>`
 
                 table.insertAdjacentHTML('beforeend', column);
@@ -41,9 +40,9 @@ function getDeathsPerCountries() {
 }
 
 if (window.addEventListener) {
-    window.addEventListener('load', getDeathsPerCountries, false);
+    //window.addEventListener('load', getDeathsPerCountries, false);
 } else if (window.attachEvent) {
-    window.attachEvent('load', getDeathsPerCountries);
+    //window.attachEvent('load', getDeathsPerCountries);
 } else {
-    document.addEventListener('load', getDeathsPerCountries, false);
+    //document.addEventListener('load', getDeathsPerCountries, false);
 }

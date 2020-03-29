@@ -9,8 +9,9 @@ function getCountries() {
 
             var header = `<thead>
             <tr>
-                <th>Countries</th>
-                <th>Number Of Cases</th>
+                <td class="white-text centered">Countries</td>
+                <td class="white-text centered">Number Of Cases</td>
+                <td class="white-text centered">Total Deaths per Country</td>
             </tr>
     
             </thead>
@@ -26,12 +27,13 @@ function getCountries() {
                 var cases = country['cases'];
                 // var active = country['active'];
                 // var critical = country['critical'];
-                // var deaths = country['deaths'];
+                var deaths = country['deaths'];
                 // var recovered = country['recovered'];
 
                 var column = `<tr>
-                   <td> ${countryName} </td>
-                   <td> ${cases} </td>
+                   <td class="white-text centered"> ${countryName} </td>
+                   <td class="white-text centered"> ${cases} </td>
+                   <td class="white-text centered"> ${deaths} </td>
                 </tr>`
 
                 table.insertAdjacentHTML('beforeend', column);
