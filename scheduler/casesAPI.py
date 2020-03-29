@@ -94,20 +94,13 @@ def update_county_cases():
                 new_county_case_data.longitude = item['coordinates']['longitude']
 
                 new_county_case_data.save()
-<<<<<<< HEAD
 
-=======
->>>>>>> master
         except:
             pass
 
 
 def _get_all_country_cases_json():
-<<<<<<< HEAD
-    url = 'https://corona.lmao.ninja/countries/USA'
-=======
     url = 'https://corona.lmao.ninja/countries'
->>>>>>> master
 
     r = requests.get(url)
 
@@ -123,33 +116,12 @@ def update_country_cases():
     if json is not None:
 
         try:
-<<<<<<< HEAD
-            for item in json:
-=======
 
             for item in json:
-
->>>>>>> master
                 new_country_case_data = countries()
 
                 new_country_case_data.country_name = item['country']
 
-<<<<<<< HEAD
-                new_country_case_data.country_ID = item['countryInfo']['_id']
-                new_country_case_data.iso3 = item['countryInfo']['iso3']
-                new_country_case_data.latitude = item['countryInfo']['lat']
-                new_country_case_data.longitude = item['countryInfo']['long']
-                new_country_case_data.flag_image = item['countryInfo']['flag']
-                new_country_case_data.cases = item['countryInfo']['cases']
-                new_country_case_data.today_cases = item['countryInfo']['todayCases']
-                new_country_case_data.deaths = item['countryInfo']['deaths']
-                new_country_case_data.today_deaths = item['countryInfo']['todayDeaths']
-                new_country_case_data.recovered = item['countryInfo']['recovered']
-                new_country_case_data.active = item['countryInfo']['active']
-                new_country_case_data.critical = item['countryInfo']['critical']
-                new_country_case_data.cases_per_million = item['countryInfo']['casesPerMillion']
-                new_country_case_data.deaths_per_million = item['countryInfo']['deathsPerMillion']
-=======
                 try:
                     int(str(item['countryInfo']['_id']))
                     new_country_case_data.country_ID = item['countryInfo']['_id']
@@ -179,7 +151,6 @@ def update_country_cases():
                     new_country_case_data.deaths_per_million = item['deathsPerOneMillion']
                 except ValueError:
                     new_country_case_data.deaths_per_million = 0
->>>>>>> master
 
                 new_country_case_data.save()
         except:
@@ -187,12 +158,6 @@ def update_country_cases():
 
 
 def gather_all_info():
-    update_cases()
-<<<<<<< HEAD
-    update_state_cases()
-    update_county_cases()
-    update_country_cases()
-=======
     print('Finished all cases...')
     update_state_cases()
     print('Finished state cases...')
@@ -200,4 +165,3 @@ def gather_all_info():
     print('Finished county cases...')
     update_country_cases()
     print('Finished country cases...')
->>>>>>> master
