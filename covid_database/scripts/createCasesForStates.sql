@@ -1,8 +1,8 @@
--- Table: public."state"
+-- Table: public."covid_state"
 
--- DROP TABLE public."state";
+-- DROP TABLE public."covid_state";
 
-CREATE TABLE public."state"
+CREATE TABLE public."covid_state"
 (
  state_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
  cases integer DEFAULT 0,
@@ -16,3 +16,7 @@ WITH (
     OIDS = FALSE
 )
 
+TABLESPACE pg_default;
+
+ALTER TABLE public."covid_state"
+    OWNER to postgres;

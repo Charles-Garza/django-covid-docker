@@ -35,15 +35,7 @@ services:
     ports:
       - 8550:8080
     networks:
-      - covid-network
-  pgadmin:
-    image: thajeztah/pgadmin4
-    container_name: covid-db-pgadmin
-    restart: always
-    ports:
-      - 8540:5050
-    networks:
-      - covid-network
+      - covid-network 
 
 volumes:
   postgres_data:

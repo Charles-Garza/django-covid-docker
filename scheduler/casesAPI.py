@@ -3,7 +3,7 @@ from covid.models import allCases, state, county, countries
 
 
 def _get_all_cases_json():
-    url = 'https://corona.lmao.ninja/all'
+    url = 'https://corona.lmao.ninja/v2/all'
 
     r = requests.get(url)
 
@@ -32,7 +32,7 @@ def update_cases():
 
 
 def _get_all_state_cases_json():
-    url = 'https://corona.lmao.ninja/states'
+    url = 'https://corona.lmao.ninja/v2/states'
 
     r = requests.get(url)
 
@@ -62,7 +62,7 @@ def update_state_cases():
 
 
 def _get_all_county_cases_json():
-    url = 'https://corona.lmao.ninja/jhucsse'
+    url = 'https://corona.lmao.ninja/v2/jhucsse/counties'
 
     r = requests.get(url)
 
@@ -82,9 +82,10 @@ def update_county_cases():
                 new_county_case_data = county()
 
                 state_obj = state.objects.get(state_name=item['province'])
+                print(item['province'])
                 new_county_case_data.state_name = state_obj
 
-                new_county_case_data.county_name = item['city']
+                new_county_case_data.county_name = item['county']
 
                 new_county_case_data.updated = item['updatedAt']
                 new_county_case_data.confirmed = item['stats']['confirmed']
@@ -94,12 +95,13 @@ def update_county_cases():
                 new_county_case_data.longitude = item['coordinates']['longitude']
 
                 new_county_case_data.save()
-        except:
+        except Exception as e:
+            print(e)
             pass
 
 
 def _get_all_country_cases_json():
-    url = 'https://corona.lmao.ninja/countries'
+    url = 'https://corona.lmao.ninja/v2/countries'
 
     r = requests.get(url)
 
@@ -123,10 +125,10 @@ def update_country_cases():
 
                 try:
                     int(str(item['countryInfo']['_id']))
-                    new_country_case_data.country_ID = item['countryInfo']['_id']
+                    new_country_case_data.country_id = item['countryInfo']['_id']
                     new_country_case_data.iso3 = item['countryInfo']['iso3']
                 except ValueError:
-                    new_country_case_data.country_ID = 0
+                    new_country_case_data.country_id = 0
                     new_country_case_data.iso3 = 'None'
 
                 new_country_case_data.latitude = item['countryInfo']['lat']
@@ -157,6 +159,7 @@ def update_country_cases():
 
 
 def gather_all_info():
+    update_cases()
     print('Finished all cases...')
     update_state_cases()
     print('Finished state cases...')

@@ -4,7 +4,7 @@
 
 CREATE TABLE public."covid_countries"
 (
- country_ID serial NOT NULL,
+ country_id serial NOT NULL,
  country_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
  latitude float DEFAULT 0,
  longitude float DEFAULT 0,

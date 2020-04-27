@@ -1,11 +1,11 @@
--- Table: public."county"
+-- Table: public."covid_county"
 
--- DROP TABLE public."county";
+-- DROP TABLE public."covid_county";
 
-CREATE TABLE public."county"
+CREATE TABLE public."covid_county"
 (
- county_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
- state_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+ county_name character varying(255) COLLATE pg_catalog."default" UNIQUE NOT NULL,
+ state_name_id character varying(255) COLLATE pg_catalog."default" NOT NULL,
  updated character varying(255) COLLATE pg_catalog."default" NOT NULL,
  confirmed integer DEFAULT 0,
  recovered integer DEFAULT 0,
@@ -20,8 +20,8 @@ WITH (
 
 TABLESPACE pg_default;
 
-ALTER TABLE county ADD FOREIGN KEY (state_name)
-REFERENCES public.state(state_name) ON DELETE CASCADE;
+ALTER TABLE covid_county ADD FOREIGN KEY (state_name_id)
+REFERENCES public.covid_state(state_name) ON DELETE CASCADE;
 
-ALTER TABLE public."county"
+ALTER TABLE public."covid_county"
     OWNER to postgres;

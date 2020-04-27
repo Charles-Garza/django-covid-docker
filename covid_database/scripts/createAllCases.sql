@@ -1,9 +1,10 @@
--- Table: public."allCases"
+-- Table: public."covid_allcases"
 
--- DROP TABLE public."allCases";
+-- DROP TABLE public."covid_allcases";
 
-CREATE TABLE public."allCases"
+CREATE TABLE public."covid_allcases"
 (
+ id serial NOT NULL,
  cases integer DEFAULT 0,
  deaths integer DEFAULT 0,
  recovered integer DEFAULT 0,
@@ -16,6 +17,6 @@ WITH (
 
 TABLESPACE pg_default;
 
-ALTER TABLE public."allCases"
+ALTER TABLE public."covid_allcases"
     OWNER to postgres;
 
