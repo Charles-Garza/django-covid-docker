@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    container_name: covid-site
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000" 
+    env_file:
+      - ./.env.dev
+    networks:
+      - covid-network
+    depends_on:
+      - db
+  db:
+    build: ./covid_database/
+    image: covid-db:v2.3
+    container_name: covid-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=django
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=covid19
+    networks:
+      - covid-network
+    restart: always
+  adminer:
+    image: adminer
+    container_name: covid-db-gui
+    restart: always
+    ports:
+      - 8550:8080
+    networks:
+      - covid-network
+  pgadmin:
+    image: thajeztah/pgadmin4
+    container_name: covid-db-pgadmin
+    restart: always
+    ports:
+      - 8540:5050
+    networks:
+      - covid-network
+
+volumes:
+  postgres_data:
+networks:
+  covid-network:
+    name: covid_network
