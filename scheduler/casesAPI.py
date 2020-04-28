@@ -79,22 +79,27 @@ def update_county_cases():
 
         try:
             for item in json:
-                new_county_case_data = county()
 
-                state_obj = state.objects.get(state_name=item['province'])
-                print(item['province'])
-                new_county_case_data.state_name = state_obj
+                if item['province'] == 'District of Columbia':
+                    print(item['province'])
+                    pass
+                else:
+                    new_county_case_data = county()
+                    state_obj = state.objects.get(state_name=item['province'])
+                    new_county_case_data.state_name = state_obj
 
-                new_county_case_data.county_name = item['county']
+                    new_county_case_data.county_name = item['county']
 
-                new_county_case_data.updated = item['updatedAt']
-                new_county_case_data.confirmed = item['stats']['confirmed']
-                new_county_case_data.deaths = item['stats']['deaths']
-                new_county_case_data.recovered = item['stats']['recovered']
-                new_county_case_data.latitude = item['coordinates']['latitude']
-                new_county_case_data.longitude = item['coordinates']['longitude']
+                    new_county_case_data.updated = item['updatedAt']
+                    new_county_case_data.confirmed = item['stats']['confirmed']
+                    new_county_case_data.deaths = item['stats']['deaths']
+                    new_county_case_data.recovered = item['stats']['recovered']
+                    new_county_case_data.latitude = item['coordinates']['latitude']
+                    new_county_case_data.longitude = item['coordinates']['longitude']
 
-                new_county_case_data.save()
+                    if (new_county_case_data.longitude != '') and \
+                        (new_county_case_data.latitude != ''):
+                        new_county_case_data.save()
         except Exception as e:
             print(e)
             pass
