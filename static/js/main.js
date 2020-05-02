@@ -1,5 +1,5 @@
 /* Global Variables */
-const apiRoot = 'http://localhost:8000/api/';
+const apiRoot = window.location.href + 'api/';
 
 /**
  * Documentation for leaflet : https://leafletjs.com/reference-1.6.0.html
