@@ -12,4 +12,3 @@ The project will also incorporate docker to offer portability and scalabilty. Th
 - Django 3.0.4
 - Docker v19.03.1 or higher
 ```
-
