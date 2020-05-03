@@ -28,6 +28,14 @@ services:
     networks:
       - covid-network
     restart: always 
+  adminer:
+    image: adminer
+    container_name: covid-db-gui
+    restart: always
+    ports:
+      - 8550:8080
+    networks:
+      - covid-network 
 
 volumes:
   postgres_data:
