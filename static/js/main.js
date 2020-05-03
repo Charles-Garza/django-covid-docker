@@ -1,6 +1,7 @@
 /* Global Variables */
 const apiRoot = window.location.href + 'api/';
 
+
 /**
  * Documentation for leaflet : https://leafletjs.com/reference-1.6.0.html
  * Maps available at : https://cloud.maptiler.com/maps/
@@ -43,7 +44,7 @@ function loadCountyMarkers() {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: (7 * confirmed) * (1/2),
+                radius: 10,
             };
 
             var marker = new Marker(latitude, longitude, markerAspect, markerPopupHTML, confirmed);
@@ -79,8 +80,8 @@ function loadCountryMarkers() {
             var markerAspect = {
                 color: 'red',
                 fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius: (7 * cases) * (1/2),
+                fillOpacity: 1,
+                radius: Math.pow(cases, 1/1.2),
             };
 
             var marker = new Marker(latitude, longitude, markerAspect, markerPopupHTML, cases);
@@ -89,7 +90,7 @@ function loadCountryMarkers() {
     });
 
 }
-darkMap.updateMarkers();
+//darkMap.updateMarkers();
 
 if (window.addEventListener) {
     window.addEventListener('load', loadCountyMarkers, false);
