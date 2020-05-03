@@ -27,15 +27,7 @@ services:
       - POSTGRES_PASSWORD=covid19
     networks:
       - covid-network
-    restart: always
-  adminer:
-    image: adminer
-    container_name: covid-db-gui
-    restart: always
-    ports:
-      - 8550:8080
-    networks:
-      - covid-network 
+    restart: always 
 
 volumes:
   postgres_data:
