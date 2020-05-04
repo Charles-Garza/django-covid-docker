@@ -1,99 +1,139 @@
 html {
 	height: 100%;
-	background-color: rgb(20, 20, 20);
 }
 
 body {
-	overflow:hidden;
+	height: 96%;
+	margin: 0px;
+	background-color: #2c2c2c;
+}
+
+body:focus {
+	outline: none;
+}
+
+h2 {
+	margin: 0;
+	padding: 0;
+}
+
+#page {
+	height: 100%;
+	margin: 16px;
+}
+
+.topnav {
+	background-color: rgb(25, 25, 25);
+	overflow: hidden;
+	border-radius: 16px;
+}
+
+.topnav .main-title {
+	float: left;
+	color: #ffffff;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 12px;
 }
 
 #content {
-	display: flex;
-	flex-flow: column;
-}
-
-#table-containers {
+	height: 93%;	
 	display: flex;
 	flex-flow: row;
-	height: 100%;
+	margin-top: 16px;
 }
 
-td {
-	padding: 10px;
-}
-
-.tables {
-	width: 100%;
-	border:0;
-	overflow: auto;
+#country-table {
+	background-color: rgb(25, 25, 25);
 	color: #ffffff;
+	width: 55%;
+	height: 100%;
+	border-radius: 16px;
+	justify-content: center;
 }
 
-table { 
-    border-spacing: 4px;
-    border-collapse: separate;
+.scroller {
+	overflow-y: scroll;
 }
 
-table, td {
-	font-family: normal normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
-    border-right: 1px solid #CCC;
-	border-top: 1px solid #DDD;
-    border-right: 1px solid #CCC;
-	border-bottom: 1px solid #DDD;
-    border-left: 1px solid #DDD;
-}
-
-/* define height and width of scrollable area. Add 16px to width for scrollbar          */
-div.tableContainer {
-	clear: both;
-	border: 1px solid #963;
-	height: 380px;
-	overflow: scroll;
-	width: 350px
-}
-
-table, td, a {
-	color: #000;
-	font: normal normal 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
-    border-right: 1px solid #CCC;
-	border-top: 1px solid #DDD;
-    border-right: 1px solid #CCC;
-	border-bottom: 1px solid #DDD;
-    border-left: 1px solid #DDD;
-}
-
-div.tableContainer table {
-	float: left;
-}
-
-.body {
-    display: block;
-    overflow-y: scroll;
-    height: 100%;
-    width: 100%;
-    margin: 2px;
-    padding: 10px;
-    position: center;
-    background-color: black;
-}
-
-.white-text {
-    color: #ffffff;
-}
-
-.red-text {
-    color: rgb(210, 0, 0);
-}
-
-.green-text {
-    color: rgb(0, 224, 30);
-}
-
-.centered {
+.table-title {
+	display: flex;
+	flex-flow: row;
 	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	padding: 16px 0px 16px 0px;
 }
 
-.arial {
+.table-row {
+	display: flex;
+	flex-flow: row;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+.hline {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #2c2c2c;
+	margin: 8px 0px 8px 0px;
+	padding: 0;
+}
+
+.t-hline {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #2c2c2c;
+	margin: 0px 0px 8px 0px;
+	padding: 0;
+}
+
+#map-total {
+	width: 100%;
+	margin-left: 16px;
+}
+
+#total-cases {
+	background-color: rgb(25, 25, 25);
+	color: #ffffff;
+	width: 100%;
+	margin: 0px 0px 0px 0px;
+	border-radius: 16px;
+	overflow: hidden;
+	font-size: 14px;
+	display: flex;
+	flex-flow: row;
+	text-align: center;
+	justify-content: center
+}
+
+#total {
+	padding: 16px;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+#map {
+	height: 92%;
+	margin-top: 1%;
+	border-radius: 16px;
+	background: #2c2c2c;
+}
+
+.max-width {
+	width: 100%;
+}
+
+.red-text {
+	color: #970000;
+}
+
+.green-text {
+	color: #009721;
+}
+
+.gray-text {
+	color: #a7a7a7;
+}

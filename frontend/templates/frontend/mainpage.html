@@ -11,17 +11,21 @@
     <link rel="stylesheet" href="{% static 'css/map_style.css' %}">
 </head>
 <body>
-    <div id="content">
-        <h3 class="white-text arial">Covid-19 Outbreaks</h3>
-        <div id="map-container">
-            <div id="map"></div>
+
+    <div id="page">
+        <div class="topnav">
+            <h2 class="main-title">Covid-19 Cases Worldwide</h2>
         </div>
 
-
-        <div id="table-containers">
-            <div id="table1" style="height:500px; width: 100%; overflow:auto;">
-                <table cellpadding="0" cellspacing="0" class="tables" id="countries-table">
-                </table>
+        <div id="content">
+            <div id="country-table" class="scroller">
+                <!-- Country table injection by js -->
+            </div>
+            <div id="map-total">
+                <div id="total-cases">
+                    <!-- Total cases injection by js -->
+                </div>
+                <div id="map"></div>
             </div>
         </div>
     </div>
@@ -31,8 +35,6 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script src="{% static 'js/map_class.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-    <script src="{% static 'js/getCountries.js' %}"></script>
-    <script src="{% static 'js/getDeathsPerCountry.js' %}"></script>
 </footer>
 </footer>
 </html>
