@@ -3,7 +3,7 @@ version: '3.7'
 services:
   web:
     build: .
-    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
     container_name: covid-site
     volumes:
       - .:/app
@@ -27,7 +27,7 @@ services:
       - POSTGRES_PASSWORD=covid19
     networks:
       - covid-network
-    restart: always
+    restart: always 
   adminer:
     image: adminer
     container_name: covid-db-gui

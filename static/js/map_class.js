@@ -3,7 +3,6 @@ class Map {
         this.map = map;
         this.markers = [];
         tileLayer.addTo(this.map);
-        this.updateMarkers();
     }
 
     addMarker(marker) {
@@ -42,7 +41,7 @@ class Map {
             var mapZoom = env.target['_zoom'];
             for (var i = 0; i < markers.length; i++) {
                 var sizeOfMarker = markers[i].cases;
-                markers[i].object.setRadius(((8 - (mapZoom - 3))*sizeOfMarker)*(1/2));
+                markers[i].object.setRadius(Math.pow(sizeOfMarker, 1/1.4));
             }
         });
     }

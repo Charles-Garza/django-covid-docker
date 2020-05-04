@@ -1,5 +1,6 @@
 /* Global Variables */
-const apiRoot = 'http://localhost:8000/api/';
+const apiRoot = window.location.href + 'api/';
+
 
 /**
  * Documentation for leaflet : https://leafletjs.com/reference-1.6.0.html
@@ -43,7 +44,7 @@ function loadCountyMarkers() {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: (7 * confirmed) * (1/2),
+                radius: Math.pow(confirmed, 1/1.4),
             };
 
             var marker = new Marker(latitude, longitude, markerAspect, markerPopupHTML, confirmed);
@@ -80,7 +81,7 @@ function loadCountryMarkers() {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: (7 * cases) * (1/2),
+                radius: Math.pow(cases, 1/1.4),
             };
 
             var marker = new Marker(latitude, longitude, markerAspect, markerPopupHTML, cases);
@@ -91,13 +92,96 @@ function loadCountryMarkers() {
 }
 darkMap.updateMarkers();
 
+// Load Table data below
+
+function getTotalCases() {
+    var url = apiRoot + 'cases';
+    var cases = document.getElementById("total-cases");
+
+    fetch(url)
+        .then((response) => response.json())
+        .then(function (tcase) {
+            console.log('Get Total Cases Data:', tcase)
+            
+            
+            var totalCase = tcase['cases'];
+            var totalRecovered = tcase['recovered'];
+            var totalDeath = tcase['deaths'];
+            var totalActive = tcase['active'];
+
+            var totalResult = `
+                <h2 id="total" class="red-text">
+                    Total Cases: ${totalCase}
+                </h2>
+                <h2 id="total" class="green-text">
+                    Total Recovered: ${totalRecovered}
+                </h2>
+                <h2 id="total" class="gray-text">
+                    Total Active: ${totalActive}
+                </h2>
+                <h2 id="total" class="gray-text">
+                    Total Deaths: ${totalDeath}
+                </h2>
+                `
+                cases.insertAdjacentHTML('beforeend', totalResult);   
+    
+        });
+}
+
+function getCountries() {
+    var url = apiRoot + 'countries';
+    var table = document.getElementById("country-table")
+
+    fetch(url)
+        .then((response) => response.json())
+        .then(function (data) {
+            console.log('Get Countries Data:', data)
+
+            var header = `
+            <div class="table-title">
+                <h2 class="max-width">Country</h2>
+                <h2 class="max-width">Cases</h2>
+                <h2 class="max-width">Recovered</h2>
+                <h2 class="max-width">Deaths</h2>
+            </div>
+            <hr class="t-hline"/>
+            `
+            table.insertAdjacentHTML('beforeend', header);
+
+            for (country of data) {
+                var countryName = country['country_name'];
+                var cases = country['cases'];
+                var deaths = country['deaths'];
+                var recovered = country['recovered'];
+
+                var column = `
+                <div class="table-row">
+                    <h2 class="max-width">${countryName}</h2>
+                    <h2 class="max-width red-text">${cases}</h2>
+                    <h2 class="max-width green-text">${recovered}</h2>
+                    <h2 class="max-width gray-text">${deaths}</h2>
+                </div>
+                <hr class="hline"/>
+                `
+
+                table.insertAdjacentHTML('beforeend', column);
+            }
+        })
+}
+
 if (window.addEventListener) {
     window.addEventListener('load', loadCountyMarkers, false);
     window.addEventListener('load', loadCountryMarkers, false);
+    window.addEventListener('load', getCountries, false);
+    window.addEventListener('load', getTotalCases, false);
 } else if (window.attachEvent) { 
     window.attachEvent('load', loadCountyMarkers);
     window.attachEvent('load', loadCountryMarkers);
+    window.attachEvent('load', getCountries);
+    window.attachEvent('load', getTotalCases);
 } else {
     document.addEventListener('load', loadCountyMarkers, false);
     document.addEventListener('load', loadCountryMarkers, false);
+    document.addEventListener('load', getCountries, false);
+    document.addEventListener('load', getTotalCases, false);
 }
